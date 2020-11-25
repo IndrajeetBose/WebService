@@ -76,7 +76,7 @@ public class RestAssuredTestGET_POST extends TestBase{
 		System.out.println("Post Status Code----> "+statusCode);
 		
 		// Response Body
-		System.out.println("Response Body RestAssured-----> "+response.getBody().asString());
+		System.out.println("Response Body-----> "+response.getBody().asString());
 		
 		String name = jsonPayload.optString("name");
 		System.out.println("Name is---> " + name);
