@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 import org.json.JSONObject;
+import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -80,6 +81,29 @@ public class RestAssuredTestGET_POST extends TestBase{
 		
 		String name = jsonPayload.optString("name");
 		System.out.println("Name is---> " + name);
+	}
+	
+	@Test(priority = 3)
+	public void PUT_RestAssured() throws IOException {
+		RestAssured.baseURI = webUrl;
+		
+		RequestSpecification request = RestAssured.given();
+		
+		request.header("Content-Type", "application/json");
+		
+		String jsonPath = path + "//JSON/PUT.json";
+		String jsonString = new String(Files.readAllBytes(Paths.get(jsonPath)));
+		JSONObject jo = new JSONObject(jsonString);
+		request.body(jo.toString());
+		
+		String putEndPoint = propertyReader.readTestData("PUT_ServiceUrl");
+		Response response = request.request(Method.PUT, putEndPoint);
+		
+		int statusCode= response.getStatusCode();
+		
+		String expectedStatusCode = propertyReader.readTestData("StatusCode200");
+		Assert.assertEquals(statusCode, Integer.parseInt(expectedStatusCode));
+		System.out.println("Status Code validated");
 	}
 
 }
