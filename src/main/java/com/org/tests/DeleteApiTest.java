@@ -40,7 +40,8 @@ public class DeleteApiTest extends TestBase {
 		String expectedStatusCode = propertyReader.readTestData("StatusCode204");
 		Assert.assertEquals(statusCode, Integer.parseInt(expectedStatusCode));
 		System.out.println("Status Code Validated------> "+statusCode);
-
+		System.out.println("Status Code Validated------> "+statusCode);
+		
 	}
 
 }
